@@ -377,10 +377,11 @@
 (defun main nil (unless *init* (main-init)) (do-until-key (main-step)))
 (defun main-step nil
    (my_step)
-   (read-webots)
+   ;; (read-webots)
    (recognition-step *camera0*)
    (recognition-step *camera1*)
-   (head-swing)
+   ;; (head-swing)
+   (when (fboundp 'walking-control) (walking-control (* 1e-3 time_step)))
    (read-keyboard)
    (send *irtviewer* :draw-objects)
    (x::window-main-one)
